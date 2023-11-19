@@ -1,0 +1,17 @@
+{
+  "name": "vite-vanilla",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "init:mangle-css": "postcss ./style.css --rewrite",
+    "dev": "npm run init:mangle-css && vite",
+    "build": "npm run init:mangle-css && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0",
+    "postcss-mangle-css-class": "file:../../packages/postcss-mangle-css-class",
+    "vite-plugin-replace-mangle-css-class": "file:../../packages/vite-plugin-replace-mangle-css-class"
+  }
+}

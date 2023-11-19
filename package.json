@@ -1,0 +1,23 @@
+{
+  "name": "mangle-css-class",
+  "version": "0.0.6",
+  "description": "Minifies and obfuscates the class names",
+  "main": "index.js",
+  "workspaces": [
+    "./packages/postcss-mangle-css-class",
+    "./packages/vite-plugin-replace-mangle-css-class"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bugs": "https://github.com/fernandcf/mangle-css-class/issues",
+  "homepage": "https://github.com/fernandcf/mangle-css-class",
+  "repository": "https://github.com/fernandcf/mangle-css-class.git",
+  "keywords": [
+    "css",
+    "minify",
+    "mangle"
+  ],
+  "author": "fernandcf",
+  "license": "MIT"
+}
