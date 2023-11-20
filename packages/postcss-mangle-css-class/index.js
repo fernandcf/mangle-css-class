@@ -43,7 +43,7 @@ function postcssObfuscateCSSclass(userOptions) {
     enable: true, // enable/disable
     cwd: process.cwd(), // the current working directory
 
-    CSSinput: "./index.css", // main CSS containing all styles
+    CSSinput: "", // main CSS containing all styles
     CSSextensions: [".css", ".sass", ".scss", ".less", ".styl"], // CSS extensions
 
     classNameRename: "[name]_[hash]", // pass an interpolated string to generate a new class name [name] [hash]
@@ -138,8 +138,12 @@ function postcssObfuscateCSSclass(userOptions) {
               return false;
             });
             const match = exceptClassNames.some((e) => {
-              const rgx = new RegExp(e);
-              return rgx.test(input);
+              try {
+                const rgx = new RegExp(e);
+                return rgx.test(input);
+              } catch (error) {
+                return e == input;
+              }
             });
             if (exists || match) {
               return input;

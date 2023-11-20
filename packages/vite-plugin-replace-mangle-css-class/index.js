@@ -5,9 +5,43 @@ import fsp from "fs/promises";
 
 const PLUGIN_NAME = "vite-plugin-replace-obfuscate-css-class";
 
-function replaceObfuscateCSS(source = "", classNames = {}) {
+function sortAndFilter(sourceJSON = "", exclude = []) {
+  const classNames = JSON.parse(sourceJSON || "{}");
+
+  return Object.keys(classNames)
+    .sort((a, b) => b.length - a.length)
+    .reduce((obj, key) => {
+      const hasExcluded = exclude.some((v) => {
+        try {
+          return v.test(key);
+        } catch (error) {
+          return key == v;
+        }
+      });
+
+      if (!hasExcluded) {
+        obj[key] = classNames[key];
+      }
+
+      return obj;
+    }, {});
+}
+
+function replaceClassNames(source = "", classNames = {}, isHTML = false) {
   const obj = classNames;
   let contains = false;
+
+  if (!isHTML) {
+    Object.keys(classNames).forEach((key) => {
+      const obfuscate = classNames[key];
+      if (obfuscate) {
+        source = source.replaceAll("." + key, () => {
+          contains = true;
+          return "." + obfuscate;
+        });
+      }
+    });
+  }
 
   /**
    * Catch class names
@@ -147,6 +181,7 @@ function toArray(value, required = false, key) {
  * @param {Boolean} options.enabled
  * @param {String[]} options.extensions
  * @param {String} options.JSONFile
+ * @param {String[]} options.exclude
  * @param {Function} options.generateBundle
  * @returns
  */
@@ -154,8 +189,9 @@ export default function (options) {
   const optionsDefault = {
     cwd: process.cwd(), // the current working directory
     enabled: true, // enabled/disabled
-    extensions: [".html", ".js"], // 
+    extensions: [".html", ".js"], // files to find and replace obfuscated classes
     JSONFile: "./.mangle-css-class/classes.json", // the json file of renamed CSS classes
+    exclude: [], // lists of all CSS classes to exclude
     generateBundle(classNames) {}, // callback after completion of replacements
   };
   options = Object.assign(optionsDefault, options);
@@ -164,6 +200,7 @@ export default function (options) {
   const callbackFinish = options.generateBundle;
   const extensions = toArray(options.extensions);
   const root = toString(options.cwd, true, "root");
+  const excluded = toArray(options.exclude);
   let pathJSON = toString(options.JSONFile, true, "JSONFile");
 
   if (!enabled) return false;
@@ -184,12 +221,11 @@ export default function (options) {
   const paths = [];
   let pathHTML = null;
   let sourceJSON = readFileSync(pathJSON, "utf-8")?.trim();
-  let classNames = JSON.parse(sourceJSON || "{}");
+  let classNames = sortAndFilter(sourceJSON, excluded);
   let timerID = null;
   return {
     name: PLUGIN_NAME,
     async buildStart() {
-
       chokidar.watch(pathJSON).on("change", async () => {
         // console.log("json changes");
 
@@ -203,7 +239,7 @@ export default function (options) {
 
           if (paths.length && hasChanged && source) {
             sourceJSON = source;
-            classNames = JSON.parse(sourceJSON || "{}");
+            classNames = sortAndFilter(sourceJSON, excluded);
 
             const paths_ = paths.concat(pathHTML).filter((x) => x);
             for (const path of paths_) {
@@ -234,7 +270,7 @@ export default function (options) {
       const { base, ext } = parse(id);
 
       if (extensions.includes(ext)) {
-        const { contains, source } = replaceObfuscateCSS(html, classNames);
+        const { contains, source } = replaceClassNames(html, classNames, true);
         pathHTML = contains ? id : null;
         return source;
       }
@@ -243,7 +279,7 @@ export default function (options) {
       const { base, ext } = parse(id);
 
       if (extensions.includes(ext)) {
-        let { contains, source } = replaceObfuscateCSS(code, classNames);
+        let { contains, source } = replaceClassNames(code, classNames);
         const index = paths.indexOf(id);
 
         if (index > -1) {

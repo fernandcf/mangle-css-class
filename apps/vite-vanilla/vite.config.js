@@ -5,6 +5,7 @@ export default defineConfig({
   plugins: [
     replaceMangleCSSClass({
       extensions: [".html", ".js", ".ts", ".vue", ".tsx", ".jsx"],
+      // exclude: "card",
     }),
   ],
 });
