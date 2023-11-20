@@ -12,7 +12,7 @@ export default [
       "fs-extra",
       "fast-glob",
       "hashids",
-      "lodash.merge"
+      "lodash.merge",
     ],
     output: [
       {
@@ -21,6 +21,20 @@ export default [
       },
       {
         file: "./dist/index.js",
+        format: "es",
+      },
+    ],
+  },
+  {
+    input: "./init.js",
+    external: ["lodash.merge", "path", "fs", "postcss", "postcss-load-config"],
+    output: [
+      {
+        file: "./dist/init.cjs",
+        format: "cjs",
+      },
+      {
+        file: "./dist/init.js",
         format: "es",
       },
     ],

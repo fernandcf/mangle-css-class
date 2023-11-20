@@ -52,6 +52,10 @@ export function writeJSFile(file = "", data = {}) {
   return fse.outputFileSync(file, content, { encoding: "utf-8" });
 }
 
+export function isObject(obj) {
+  return typeof obj === "object" && !Array.isArray(obj) && obj !== null;
+}
+
 export function convertToArray(value) {
   const arr = Array.isArray(value) ? value : [value];
   return arr.filter((x) => x);

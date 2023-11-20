@@ -62,7 +62,7 @@ Enable/disable plugin. Default: `true`
 The current working directory. Default: `process.cwd()`
 
 #### CSSinput String, String[]
-CSS files that are allowed to be analyzed. e.g: `'./app.css'`
+Establishes which CSS files should be analyzed. e.g: `'./app.css'`
 
 #### classNameRename String
 Set an interpolated string to rename CSS classes. Placeholders compatible:
@@ -99,8 +99,7 @@ The path of the file where the replaced classes will be saved. Default: `"./.man
 ```json
 {
   "card":"ahJ25g",
-  "card-body":"Awk1JO",
-  ...
+  "card-body":"Awk1JO"
 }
 ```
 
@@ -119,12 +118,52 @@ Default: `false`.
 #### getOutput(renamed, excluded) Function
 A callback that passes the renamed and excluded CSS classes.
 
+## Utilities/Methods
+
+#### init
+Required to start; It should commonly be called before any script.
+
+```js
+const options_ = {
+  cwd: process.cwd(),
+  CSSinput: "",
+  postcss: null,
+  context: {},
+};
+```
+- `cwd` the current working directory. Default `process.cwd()`
+- `CSSinput` CSS files that are allowed to be analyzed. e.g: `'./app.css'`
+- `postcss` Inline PostCSS config.
+- `context` When using a {Function}, it's possible to pass context. 
+
+e.g:
+```js
+import initMangleCSSClass from "postcss-mangle-css-class/init";
+
+initMangleCSSClass({
+  CSSinput: "./style.css",
+  context: { rewrite: true },
+});
+```
+
+#### in-browser
+Utilities that can be safely included in the browser environment.
+
+e.g:
+```js
+import {className} from "postcss-mangle-css-class/in-browser";
+// replace "-" with "_"
+const underscore = className("card-body");
+console.log(underscore);
+// card_body
+```
+
 ## Examples
 
 Each package has its own particularity, which is why we have prepared the following examples of how you could use this plugin. For more details:
 
 ### If you are using `vite` ...
-You can use the plugin `vite-plugin-replace-mangle-css-class` [Documentation]()
+You can use the plugin `vite-plugin-replace-mangle-css-class` [Documentation](https://github.com/fernandcf/mangle-css-class/tree/main/packages/vite-plugin-replace-mangle-css-class)
 
 - [Vite HTML Alpinejs]()
 - [Vite Reactjs]()

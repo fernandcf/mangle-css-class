@@ -1,16 +1,17 @@
 import postCSSMangleCSSClass from "postcss-mangle-css-class";
 
-export default {
+export default (context) => ({
   plugins: [
     postCSSMangleCSSClass({
       CSSinput: "./style.css",
       export: {
-        rewrite: process.argv?.includes("--rewrite"),
+        rewrite: context.rewrite || false,
       },
-      classNameRename: "[name]_[hash]",
+      classNameRename:
+        context.env == "development" ? "[name]_[hash]" : "[hash]",
       getOutput(renamed, excluded) {
         // console.log("output", { renamed, excluded });
       },
     }),
   ],
-};
+});

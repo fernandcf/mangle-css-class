@@ -4,9 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "init:mangle-css": "postcss ./style.css --rewrite",
-    "dev": "npm run init:mangle-css && vite",
-    "build": "npm run init:mangle-css && vite build",
+    "dev": "vite",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "devDependencies": {

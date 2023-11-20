@@ -81,8 +81,7 @@ The JSON file containing all the renamed css classes. From this file you will ge
 ```json
 {
   "card":"pkJ414a",
-  "card-body":"mki4Aak",
-  ...
+  "card-body":"mki4Aak"
 }
 ```
 
@@ -91,7 +90,7 @@ List of all CSS classes that should not be replaced. Accepts values ​​of typ
 e.g.: `["card", /card/gi]`
 
 #### generateBundle(classNames) Function
-A callback that is called after generating the bundle. For more info -> [rollupjs#generateBundle](https://rollupjs.org/plugin-development/#generatebundle)
+A callback that is called after generating the bundle.
 
 
 ## Example
@@ -134,7 +133,7 @@ Output code
 
 Dynamically generated css classes will not be replaced
 
-We recommend using this vite plugin with [postcss-mangle-css-class]() 
+We recommend using this vite plugin with [postcss-mangle-css-class](https://github.com/fernandcf/mangle-css-class/tree/main/packages/postcss-mangle-css-class) 
 
 ## License
 

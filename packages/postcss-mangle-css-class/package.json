@@ -16,6 +16,10 @@
     "./in-browser": {
       "import": "./dist/in-browser.js",
       "require": "./dist/in-browser.cjs"
+    },
+    "./init": {
+      "import": "./dist/init.js",
+      "require": "./dist/init.cjs"
     }
   },
   "scripts": {
@@ -38,12 +42,13 @@
     "fs-extra": "^11.1.1",
     "hashids": "^2.3.0",
     "lodash.merge": "^4.6.2",
-    "postcss-cli": "^10.1.0",
+    "postcss": "^8.4.31",
     "postcss-rename": "^0.6.1"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
+    "postcss-load-config": "^4.0.2",
     "rollup": "^4.5.0"
   }
 }
