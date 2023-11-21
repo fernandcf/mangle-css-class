@@ -20,15 +20,13 @@ import initMangleCSSClass from "postcss-mangle-css-class/init";
 
 // initialize and wait
 await initMangleCSSClass({
-  CSSinput: "./style.css",
-  context: { rewrite: true },
+  CSSinput: "./style.css"
 });
 
 export default defineConfig({
   plugins: [
     replaceMangleCSSClass({
-      extensions: [".html", ".js", ".ts", ".vue", ".tsx", ".jsx"],
-      // exclude: "card",
+      extensions: [".html", ".js", ".ts", ".vue", ".tsx", ".jsx"]
     }),
   ],
 });
@@ -38,21 +36,21 @@ export default defineConfig({
 // postcss.config.js 
 import postCSSMangleCSSClass from "postcss-mangle-css-class";
 
-export default (context) => ({
+export default {
   plugins: [
     postCSSMangleCSSClass({
       CSSinput: "./style.css",
       export: {
-        rewrite: context.rewrite || false,
+        rewrite: process.env.INIT_MANGLE || false,
       },
       classNameRename:
-        context.env == "development" ? "[name]_[hash]" : "[hash]",
+        process.env.NODE_ENV == "development" ? "[name]_[hash]" : "[hash]",
       getOutput(renamed, excluded) {
         // console.log("output", { renamed, excluded });
       },
     }),
   ],
-});
+};
 ```
 
 ## MIT License ##
