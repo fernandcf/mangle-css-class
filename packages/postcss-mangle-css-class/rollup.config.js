@@ -27,7 +27,16 @@ export default [
   },
   {
     input: "./init.js",
-    external: ["lodash.merge", "path", "fs", "postcss", "postcss-load-config"],
+    external: [
+      "lodash.merge",
+      "path",
+      "fs",
+      "postcss",
+      "postcss-load-config",
+      "fs-extra",
+      "fast-glob",
+      "hashids",
+    ],
     output: [
       {
         file: "./dist/init.cjs",

@@ -65,14 +65,24 @@ function postcssObfuscateCSSclass(userOptions) {
     },
 
     getOutput(renamed, excluded) {}, // A callback that's passed a map from original class names to their renamed equivalents
+
+    warn: false, // display message de `warning` in console
   };
 
   merge(options, userOptions);
 
   // console.log("post-css-plugin", options);
 
-  const { enable, cwd, CSSinput, exclude, hash, getOutput, classNameRename } =
-    options;
+  const {
+    enable,
+    cwd,
+    CSSinput,
+    exclude,
+    hash,
+    getOutput,
+    classNameRename,
+    warn,
+  } = options;
   const { rewrite, JSFile, JSONFile } = options.export;
   const CSSextensions = convertToArray(options.CSSextensions);
 
@@ -197,10 +207,12 @@ function postcssObfuscateCSSclass(userOptions) {
         }).prepare(param);
       }
 
-      console.warn(
-        PLUGIN_NAME,
-        `The file '${from}' will be ignored because it was not declared in 'CSSinput'`
-      );
+      if (warn) {
+        console.warn(
+          PLUGIN_NAME,
+          `The file '${from}' will be ignored because it was not declared in 'CSSinput'`
+        );
+      }
 
       return {};
     },

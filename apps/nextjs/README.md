@@ -1,7 +1,7 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 
-### Edited files...
+### Files created and/or edited...
 
 ```js
 // next.config.js
@@ -33,6 +33,18 @@ module.exports = {
     },
   },
 };
+```
+
+```js
+// app/mangle.js 
+import classes from "../.mangle-css-class/classes";
+
+export default function (classNames = "") {
+  return classNames
+    .split(" ")
+    .map((cls) => classes[cls] || cls)
+    .join(" ");
+}
 ```
 
 ## Getting Started

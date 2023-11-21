@@ -3,6 +3,7 @@ import merge from "lodash.merge";
 import { resolve } from "path";
 import fs from "fs";
 import postcssrc from "postcss-load-config";
+import loadPlugins from "postcss-load-config/src/plugins";
 import { convertToArray, isObject } from "./utils";
 
 /**
@@ -17,7 +18,7 @@ export default async function (userOptions) {
   const options = {
     cwd: process.cwd(),
     CSSinput: "",
-    postcss: null
+    postcss: null,
   };
   merge(options, userOptions);
 
@@ -46,7 +47,7 @@ export default async function (userOptions) {
     postcss_.options = result.options;
     postcss_.plugins = result.plugins;
   } else {
-    postcss_.plugins = postcssConfig.plugins;
+    postcss_.plugins = loadPlugins(postcssConfig, root);
     delete postcssConfig.plugins;
     postcss_.options = postcssConfig;
   }

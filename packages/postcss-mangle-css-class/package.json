@@ -13,10 +13,6 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
-    "./in-browser": {
-      "import": "./dist/in-browser.js",
-      "require": "./dist/in-browser.cjs"
-    },
     "./init": {
       "import": "./dist/init.js",
       "require": "./dist/init.cjs"
