@@ -152,13 +152,13 @@ Each package has its own particularity, which is why we have prepared the follow
 You can use the plugin `vite-plugin-replace-mangle-css-class` [Documentation](https://github.com/fernandcf/mangle-css-class/tree/main/packages/vite-plugin-replace-mangle-css-class)
 
 - [Vite HTML Alpinejs](https://github.com/fernandcf/mangle-css-class/tree/main/apps/vite-vanilla)
-- [Vite Reactjs]()
-- [Vite Vuejs]()
+<!-- - [Vite Reactjs]()
+- [Vite Vuejs]() -->
 
 ### Others ...
-- [Nextjs]()
-- [Nuxtjs]()
-- [Laravel]()
+- [Nextjs](https://github.com/fernandcf/mangle-css-class/blob/main/apps/nextjs)
+- [Nuxtjs](https://github.com/fernandcf/mangle-css-class/blob/main/apps/nuxtjs)
+<!-- - [Laravel]() -->
 
 ## Recommendations
 
