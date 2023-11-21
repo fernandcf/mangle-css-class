@@ -9,6 +9,16 @@
   },
   "author": "fernandcf",
   "license": "MIT",
+  "keywords": [
+    "css",
+    "minify",
+    "mangle",
+    "vite",
+    "replace-html",
+    "obfuscate",
+    "html",
+    "mangle css class"
+  ],
   "dependencies": {
     "fast-glob": "^3.3.2",
     "fs-extra": "^11.1.1",
