@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-replace-mangle-css-class",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Vite plugin to replace minified and obfuscated CSS classes at runtime.",
   "main": "index.js",
   "type": "module",
@@ -19,6 +19,9 @@
     "html",
     "mangle css class"
   ],
+  "bugs": "https://github.com/fernandcf/mangle-css-class/issues",
+  "homepage": "https://github.com/fernandcf/mangle-css-class",
+  "repository": "https://github.com/fernandcf/mangle-css-class.git",
   "dependencies": {
     "fast-glob": "^3.3.2",
     "fs-extra": "^11.1.1",
