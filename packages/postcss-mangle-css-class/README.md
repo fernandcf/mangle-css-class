@@ -133,29 +133,15 @@ const options_ = {
 ```
 - `cwd` the current working directory. Default `process.cwd()`
 - `CSSinput` CSS files that are allowed to be analyzed. e.g: `'./app.css'`
-- `postcss` Inline PostCSS config.
-- `context` When using a {Function}, it's possible to pass context. 
+- `postcss` PostCSS config. Default: load `postcss.config.js` in the root project
 
 e.g:
 ```js
 import initMangleCSSClass from "postcss-mangle-css-class/init";
 
 initMangleCSSClass({
-  CSSinput: "./style.css",
-  context: { rewrite: true },
+  CSSinput: "./style.css"
 });
-```
-
-#### in-browser
-Utilities that can be safely included in the browser environment.
-
-e.g:
-```js
-import {className} from "postcss-mangle-css-class/in-browser";
-// replace "-" with "_"
-const underscore = className("card-body");
-console.log(underscore);
-// card_body
 ```
 
 ## Examples
@@ -165,7 +151,7 @@ Each package has its own particularity, which is why we have prepared the follow
 ### If you are using `vite` ...
 You can use the plugin `vite-plugin-replace-mangle-css-class` [Documentation](https://github.com/fernandcf/mangle-css-class/tree/main/packages/vite-plugin-replace-mangle-css-class)
 
-- [Vite HTML Alpinejs]()
+- [Vite HTML Alpinejs](https://github.com/fernandcf/mangle-css-class/tree/main/apps/vite-vanilla)
 - [Vite Reactjs]()
 - [Vite Vuejs]()
 

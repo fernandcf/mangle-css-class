@@ -6,26 +6,25 @@ import postcssrc from "postcss-load-config";
 import { convertToArray, isObject } from "./utils";
 
 /**
- * 
+ *
  * @param {Object} userOptions
  * @param {String} userOptions.cwd
  * @param {String[]} userOptions.CSSinput
- * @param {Object} userOptions.postcss 
+ * @param {Object} userOptions.postcss
  * @param {Array} userOptions.postcss.plugins
- * @param {Object} userOptions.context 
  */
 export default async function (userOptions) {
   const options = {
     cwd: process.cwd(),
     CSSinput: "",
-    postcss: null,
-    context: {},
+    postcss: null
   };
   merge(options, userOptions);
 
+  process.env.INIT_MANGLE = true;
+
   const root = options.cwd;
   const CSSinputs = convertToArray(options.CSSinput);
-  const ctx = options.context || {};
   let postcssConfig = options.postcss;
 
   let loadPostcssConfig = true;
@@ -35,7 +34,7 @@ export default async function (userOptions) {
     }
   } else if (typeof postcssConfig === "function") {
     loadPostcssConfig = false;
-    postcssConfig = postcssConfig(ctx);
+    postcssConfig = postcssConfig();
   } else if (isObject(postcssConfig) && Object.keys(postcssConfig).length) {
     loadPostcssConfig = false;
     postcssConfig = postcssConfig;
@@ -43,7 +42,7 @@ export default async function (userOptions) {
 
   const postcss_ = { options: {}, plugins: [] };
   if (loadPostcssConfig) {
-    const result = await postcssrc(ctx);
+    const result = await postcssrc();
     postcss_.options = result.options;
     postcss_.plugins = result.plugins;
   } else {
@@ -63,4 +62,5 @@ export default async function (userOptions) {
     const { css, map } = result;
     // console.log("init", { css, map });
   }
+  process.env.INIT_MANGLE = false;
 }

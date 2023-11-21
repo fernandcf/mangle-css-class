@@ -28,27 +28,15 @@ export function writeJSONFile(file = "", data = {}) {
   return fse.outputFileSync(file, JSON.stringify(data), { encoding: "utf-8" });
 }
 
-export function convertClassName(name) {
-  return name.replaceAll("_", "__").replaceAll("-", "_");
-}
-
 export function writeJSFile(file = "", data = {}) {
   let content = "";
-  const keys = Object.keys(data);
-  const names = [];
-
-  if (keys.length) {
-    content += keys
-      .map((key) => {
-        const value = data[key];
-        const name = convertClassName(key);
-        names.push(name);
-        return `const ${name} = "${value}";`;
-      })
-      .join("\n");
-    content += "\n";
-  }
-  content += `export default {${names.join(",")}}`;
+  const classes = Object.entries(data)
+    .map((v) => {
+      const [key, value] = v;
+      return `"${key}":"${value}"`;
+    })
+    .join(",");
+  content += `export default {${classes}}`;
   return fse.outputFileSync(file, content, { encoding: "utf-8" });
 }
 

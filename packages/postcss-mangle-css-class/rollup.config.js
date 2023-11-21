@@ -39,25 +39,25 @@ export default [
       },
     ],
   },
-  {
-    input: "./in-browser.js",
-    treeshake: "smallest",
-    output: [
-      {
-        file: "./dist/in-browser.cjs",
-        format: "cjs",
-      },
-      {
-        file: "./dist/in-browser.js",
-        format: "es",
-      },
-    ],
-    plugins: [
-      nodeResolve({ preferBuiltins: false }),
-      commonjs({
-        include: /node_modules/,
-        requireReturnsDefault: "auto", // <---- this solves default issue
-      }),
-    ],
-  },
+  // {
+  //   input: "./in-browser.js",
+  //   treeshake: "smallest",
+  //   output: [
+  //     {
+  //       file: "./dist/in-browser.cjs",
+  //       format: "cjs",
+  //     },
+  //     {
+  //       file: "./dist/in-browser.js",
+  //       format: "es",
+  //     },
+  //   ],
+  //   plugins: [
+  //     nodeResolve({ preferBuiltins: false }),
+  //     commonjs({
+  //       include: /node_modules/,
+  //       requireReturnsDefault: "auto", // <---- this solves default issue
+  //     }),
+  //   ],
+  // },
 ];
