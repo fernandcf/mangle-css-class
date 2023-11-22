@@ -4,6 +4,12 @@
  Vite plugin to replace minified and obfuscated CSS classes at runtime. In addition to pure html. It is compatible with the most popular javascript frameworks such as reactjs, vuejs and alpinejs.
  </h4>
 
+## Installation
+
+```bash
+npm i vite-plugin-replace-mangle-css-class
+```
+
 ## Usage
 
 The plugin will generate optimized class name in HTML and JavaScript. configure as follows:

@@ -4,6 +4,12 @@
 It is a postcss plugin to obfuscate and minify CSS classes without any modern CSS modules and c ompatible with bootstrapcss, tailwindcss, bulma ... and any CSS framework 
 </h4>
 
+## Installation
+
+```bash
+npm i postcss-mangle-css-class
+```
+
 ## Usage
 
 The plugin will generate optimized class name. Configure minimally as follows:
